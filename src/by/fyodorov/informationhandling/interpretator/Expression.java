@@ -1,4 +1,5 @@
 package by.fyodorov.informationhandling.interpretator;
 
-public class TextInterpretator {
+public interface Expression {
+    int interpret();
 }
