@@ -28,15 +28,24 @@ public class StaticArguments {
     public int getI() {
         return i;
     }
+
     public void incrementI() {
         i++;
+    }
+
+    public void decrementI() {
+        i--;
     }
 
     public int getJ() {
         return j;
     }
 
-    public void incrmentJ() {
+    public void incrementJ() {
         j++;
+    }
+
+    public void decrementJ() {
+        j--;
     }
 }

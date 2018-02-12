@@ -3,6 +3,7 @@ package by.fyodorov.informationhandling.parser;
 import by.fyodorov.informationhandling.composite.Compositely;
 import by.fyodorov.informationhandling.composite.TextCompositeComponent;
 import by.fyodorov.informationhandling.reader.TextReader;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -45,6 +46,61 @@ public class StringParserTest {
         StringParser parser = new StringParser();
         System.out.println("---------------------");
         System.out.println(parser.parse(text));
+    }
+
+    @Test
+    public void regularTest() throws Exception {
+        final String POSTFIKS_EXPRESSION = "\\s[ij][+\\-]{2}\\s";
+        final String PREFIKS_EXPRESSION = "\\s[\\-+]{2}[ij]\\s";
+        final String ARIPMETIC_EXPRESSION = "(" + POSTFIKS_EXPRESSION + ")|(" + PREFIKS_EXPRESSION + ")";
+
+        String prefiks_i_plus = " ++i ";
+        String prefiks_i_minus = " --i ";
+
+        String postfiks_i_plus = " i++ ";
+        String postfiks_i_minus = " i-- ";
+
+        String prefiks_j_plus = " ++j ";
+        String prefiks_j_minus = " --j ";
+
+        String postfiks_j_plus = " j++ ";
+        String postfiks_j_minus = " j-- ";
+
+
+        Assert.assertTrue(prefiks_i_minus.matches(PREFIKS_EXPRESSION));
+        Assert.assertTrue(prefiks_i_plus.matches(PREFIKS_EXPRESSION));
+
+        Assert.assertTrue(prefiks_j_minus.matches(PREFIKS_EXPRESSION));
+        Assert.assertTrue(prefiks_j_plus.matches(PREFIKS_EXPRESSION));
+
+        Assert.assertTrue(postfiks_i_minus.matches(POSTFIKS_EXPRESSION));
+        Assert.assertTrue(postfiks_i_plus.matches(POSTFIKS_EXPRESSION));
+
+        Assert.assertTrue(postfiks_j_minus.matches(POSTFIKS_EXPRESSION));
+        Assert.assertTrue(postfiks_j_plus.matches(POSTFIKS_EXPRESSION));
+
+
+
+
+        Assert.assertFalse(prefiks_i_minus.matches(POSTFIKS_EXPRESSION));
+        Assert.assertFalse(postfiks_i_minus.matches(PREFIKS_EXPRESSION));
+
+
+
+
+        Assert.assertTrue(prefiks_i_minus.matches(ARIPMETIC_EXPRESSION));
+        Assert.assertTrue(prefiks_i_plus.matches(ARIPMETIC_EXPRESSION));
+        Assert.assertTrue(prefiks_j_minus.matches(ARIPMETIC_EXPRESSION));
+        Assert.assertTrue(prefiks_j_plus.matches(ARIPMETIC_EXPRESSION));
+        Assert.assertTrue(postfiks_i_minus.matches(ARIPMETIC_EXPRESSION));
+        Assert.assertTrue(postfiks_i_plus.matches(ARIPMETIC_EXPRESSION));
+        Assert.assertTrue(postfiks_j_minus.matches(ARIPMETIC_EXPRESSION));
+        Assert.assertTrue(postfiks_j_plus.matches(ARIPMETIC_EXPRESSION));
+
+
+        Assert.assertFalse(" k++ ".matches(ARIPMETIC_EXPRESSION));
+        Assert.assertFalse(" i** ".matches(ARIPMETIC_EXPRESSION));
+        Assert.assertFalse(" i+ ".matches(ARIPMETIC_EXPRESSION));
     }
 
     private void outComp(Compositely comp) {

@@ -1,13 +1,18 @@
 package by.fyodorov.informationhandling.interpretator;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ContextTest {
 
     @Test
     public void testEvaluate() throws Exception {
-        final String EXPRESSION = "123-23+3+4";
+        final String EXPRESSION = "123-(23+3)+ ++j +4";
         Context context = new Context();
-        System.out.println(context.evaluate(EXPRESSION).interpret());
+        PolishParser polishParser = new PolishParser();
+        StaticArguments.getInstance().initialize(2,7);
+        String polish = polishParser.toPolish(EXPRESSION);
+
+        Assert.assertEquals(context.evaluate(polish).interpret(), 109);
     }
 }

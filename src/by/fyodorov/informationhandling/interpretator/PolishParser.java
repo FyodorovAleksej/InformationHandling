@@ -1,13 +1,15 @@
 package by.fyodorov.informationhandling.interpretator;
 
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PolishParser {
-    final static String POSTFIKS_EXPRESSION = "\\s[ij][+\\-]{2}\\s";
-    final static String PREFIKS_EXPRESSION = " \\s[\\-+]{2}[ij]\\s";
+    final static String POSTFIKS_EXPRESSION = "[ij][+\\-]{2}";
+    final static String PREFIKS_EXPRESSION = "[\\-+]{2}[ij]";
     final static String ARIPMETIC_EXPRESSION = "(" + POSTFIKS_EXPRESSION + ")|(" + PREFIKS_EXPRESSION + ")";
 
-    final static int ARIPMETIC_LENGTH = 5;
+    final static int ARIPMETIC_LENGTH = 3;
 
     public String toPolish(String s) {
         StringBuilder result = new StringBuilder();
@@ -33,16 +35,15 @@ public class PolishParser {
             }
             if (s.charAt(i) == '+' || s.charAt(i) == '-' || s.charAt(i) == '*' || s.charAt(i) == '/' || s.charAt(i) == ' ') {
                 if (s.charAt(i) == ' ') {
-                    String expression = s.substring(i, i + ARIPMETIC_LENGTH);
+                    String expression = s.substring(i + 1, i + ARIPMETIC_LENGTH + 1);
                     if (expression.matches(ARIPMETIC_EXPRESSION)) {
-                        //Pattern pattern = Pattern.compile("[ij]");
-                        //Matcher matcher = pattern.matcher(expression);
-                        //if (matcher.find()) {
-                        //    result.append(matcher.)
-                        //}
-                        result.append("i").append(" ");
+                        Pattern pattern = Pattern.compile("[ij]");
+                        Matcher matcher = pattern.matcher(expression);
+                        if (matcher.find()) {
+                            result.append(expression.charAt(matcher.start())).append(" ");
+                        }
                         addOperation(stack, result, expression);
-                        i += ARIPMETIC_LENGTH - 1;
+                        i += ARIPMETIC_LENGTH + 1;
                     }
                 } else {
                     addOperation(stack, result, String.valueOf(s.charAt(i)));
@@ -78,7 +79,6 @@ public class PolishParser {
             case "-": { return 3;}
             case "(": { return 1;}
             default:  {
-                System.out.println("");
                 if (operation.matches(PREFIKS_EXPRESSION)) {
                     return 5;
                 }
