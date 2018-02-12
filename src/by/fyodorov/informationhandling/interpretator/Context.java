@@ -12,17 +12,7 @@ public class Context {
 
         for (int i = 0; i < expressions.length; i++) {
             if (isAripmetic(expressions[i])) {
-                executeAripmetic(expressions[i]);
-            }
-            if (isVariable(expressions[i])) {
-                if (i + 1 < expressions.length && isAripmetic(expressions[i + 1])) {
-                    executeAripmetic(expressions[i + 1]);
-                    stack.push(new NumericExpression(getVariable(expressions[i])));
-                    i++;
-                    continue;
-                } else {
-                    stack.push(new NumericExpression(getVariable(expressions[i])));
-                }
+                stack.push(new ExecuteExpression(expressions[i]));
             }
             if (isNumber(expressions[i])) {
                 stack.push(new NumericExpression(Integer.valueOf(expressions[i])));
@@ -88,40 +78,5 @@ public class Context {
         final String PREFIKS_EXPRESSION = "[\\-+]{2}[ij]";
         final String ARIPMETIC_EXPRESSION = "(" + POSTFIKS_EXPRESSION + ")|(" + PREFIKS_EXPRESSION + ")";
         return s.matches(ARIPMETIC_EXPRESSION);
-    }
-
-    private boolean isVariable(String s) {
-        final String VARIABLE_EXPRESSION = "[ij]";
-        return s.matches(VARIABLE_EXPRESSION);
-    }
-
-    private void executeAripmetic(String s) {
-        if (s.indexOf('i') != -1) {
-            if (s.indexOf('-') != -1) {
-                StaticArguments.getInstance().decrementI();
-            }
-            if (s.indexOf('+') != -1) {
-                StaticArguments.getInstance().incrementI();
-            }
-        }
-
-        if (s.indexOf('j') != -1) {
-            if (s.indexOf('-') != -1) {
-                StaticArguments.getInstance().decrementJ();
-            }
-            if (s.indexOf('+') != -1) {
-                StaticArguments.getInstance().incrementJ();
-            }
-        }
-    }
-
-    private int getVariable(String s) {
-        if (s.indexOf('i') != -1) {
-            return StaticArguments.getInstance().getI();
-        }
-        if (s.indexOf('j') != -1) {
-            return StaticArguments.getInstance().getJ();
-        }
-        return 0;
     }
 }

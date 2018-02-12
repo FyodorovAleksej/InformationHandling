@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringParser {
-    private static final String PARAGRAPH_EXPRESSION = "\\t|\\s{4}";
+    private static final String PARAGRAPH_EXPRESSION = "(\\t)|(\\s{4}).+(\\n|$)";
     private static final String SENTENCE_EXPRESSION = "[A-Z].*?[\\.\\?\\!]{1}";
     private static final String LEXEME_EXPRESSION = "(\\?|\\!|\\,|\\.|^|\\s){1}.+?(\\s|\\.|\\!|\\?|\\,){1}";
     private static final String MATH_EXPRESSION = "[0-9]|[a-z]+[\\-+/*]{1,2}[0-9]|[a-z]+";
@@ -56,7 +56,6 @@ public class StringParser {
         LinkedList<String> list = new LinkedList<String>();
         while(m.find()) {
             list.add(text.substring(m.start(), m.end()));
-            System.out.println(text.substring(m.start(), m.end()));
         }
         return list;
     }

@@ -37,12 +37,7 @@ public class PolishParser {
                 if (s.charAt(i) == ' ') {
                     String expression = s.substring(i + 1, i + ARIPMETIC_LENGTH + 1);
                     if (expression.matches(ARIPMETIC_EXPRESSION)) {
-                        Pattern pattern = Pattern.compile("[ij]");
-                        Matcher matcher = pattern.matcher(expression);
-                        if (matcher.find()) {
-                            result.append(expression.charAt(matcher.start())).append(" ");
-                        }
-                        addOperation(stack, result, expression);
+                        result.append(expression).append(" ");
                         i += ARIPMETIC_LENGTH + 1;
                     }
                 } else {

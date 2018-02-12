@@ -15,4 +15,28 @@ public class ContextTest {
 
         Assert.assertEquals(context.evaluate(polish).interpret(), 109);
     }
+
+    @Test
+    public void testPrefiksEvaluate() throws Exception {
+        final String EXPRESSION = "1+ ++j -2+ ++j -1";
+        Context context = new Context();
+        PolishParser polishParser = new PolishParser();
+        StaticArguments.getInstance().initialize(1,1);
+        String polish = polishParser.toPolish(EXPRESSION);
+
+        Assert.assertEquals(context.evaluate(polish).interpret(), 3);
+    }
+
+    @Test
+    public void testPostfiksEvaluate() throws Exception {
+        final String EXPRESSION = " j++ + j++ ";
+        Context context = new Context();
+        PolishParser polishParser = new PolishParser();
+        StaticArguments.getInstance().initialize(1,1);
+        String polish = polishParser.toPolish(EXPRESSION);
+
+        Assert.assertEquals(context.evaluate(polish).interpret(), 3);
+    }
+
+
 }
