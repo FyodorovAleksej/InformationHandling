@@ -47,4 +47,12 @@ public class StringParserTest {
         System.out.println("---------------------");
         System.out.println(parser.parse(text));
     }
+
+    @Test
+    public void testHandler() throws Exception {
+        TextParserBuilder builder = new TextParserBuilder();
+        ParserHandler handler = builder.getStandartTextParser();
+        Compositely compositely = handler.parse("    I am versus kind good after that. And many off hash a sad!    Determination flash 2+4 flipper 8-24 yet.");
+        System.out.println(compositely);
+    }
 }

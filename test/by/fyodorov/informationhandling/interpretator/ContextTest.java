@@ -17,6 +17,15 @@ public class ContextTest {
     }
 
     @Test
+    public void testBase() throws Exception {
+        final String EXPRESSION = "2+4";
+        Context context = new Context();
+        PolishParser polishParser = new PolishParser();
+        String polish = polishParser.toPolish(EXPRESSION);
+        Assert.assertEquals(context.evaluate(polish).interpret(), 6);
+    }
+
+    @Test
     public void testPrefiksEvaluate() throws Exception {
         final String EXPRESSION = "1+ ++j -2+ ++j -1";
         Context context = new Context();
