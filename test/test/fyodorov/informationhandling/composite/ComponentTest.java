@@ -19,9 +19,6 @@ public class ComponentTest {
     public void tearDown() throws Exception {
     }
 
-    @Test
-    public void testGetChildrens() throws Exception {
-    }
 
     @Test
     public void testExecute() throws Exception {

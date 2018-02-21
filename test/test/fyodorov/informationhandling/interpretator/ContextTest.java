@@ -1,5 +1,8 @@
-package by.fyodorov.informationhandling.interpretator;
+package test.fyodorov.informationhandling.interpretator;
 
+import by.fyodorov.informationhandling.interpretator.Context;
+import by.fyodorov.informationhandling.interpretator.PolishParser;
+import by.fyodorov.informationhandling.interpretator.StaticArguments;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -26,7 +29,7 @@ public class ContextTest {
     }
 
     @Test
-    public void testPrefiksEvaluate() throws Exception {
+    public void testPrefixEvaluate() throws Exception {
         final String EXPRESSION = "1+ ++j -2+ ++j -1";
         Context context = new Context();
         PolishParser polishParser = new PolishParser();
@@ -37,7 +40,7 @@ public class ContextTest {
     }
 
     @Test
-    public void testPostfiksEvaluate() throws Exception {
+    public void testPostfixEvaluate() throws Exception {
         final String EXPRESSION = " j++ + j++ ";
         Context context = new Context();
         PolishParser polishParser = new PolishParser();
@@ -46,6 +49,4 @@ public class ContextTest {
 
         Assert.assertEquals(context.evaluate(polish).interpret(), 3);
     }
-
-
 }

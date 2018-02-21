@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="Standard">
+        <classes>
+            <class name="test.fyodorov.informationhandling.composite.ComponentTest">
+                <methods>
+                    <include name="testExecute"/>
+                </methods>
+            </class>
+            <class name="test.fyodorov.informationhandling.interpretator.ContextTest">
+                <methods>
+                    <include name="testEvaluate"/>
+                    <include name="testBase"/>
+                    <include name="testPrefixEvaluate"/>
+                    <include name="testPostfixEvaluate"/>
+                </methods>
+            </class>
+            <class name="test.fyodorov.informationhandling.interpretator.PolishParserTest">
+                <methods>
+                    <include name="testToPolish"/>
+                    <include name="testToPolishBase"/>
+                    <include name="testToPolishArithmetic"/>
+                </methods>
+            </class>
+            <class name="test.fyodorov.informationhandling.parser.StringParserTest">
+                <methods>
+                    <include name="testParseLexeme"/>
+                    <include name="testParseSentence"/>
+                    <include name="testParseSentenceExecute"/>
+                    <include name="testParseParagraph"/>
+                    <include name="testParseParagraphExecute"/>
+                    <include name="testParseAll"/>
+                </methods>
+            </class>
+            <class name="test.fyodorov.informationhandling.reader.TextReaderTest">
+                <methods>
+                    <include name="testReadPositive"/>
+                    <include name="testReadNegative"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

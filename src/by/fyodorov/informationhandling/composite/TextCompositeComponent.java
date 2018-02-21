@@ -3,26 +3,26 @@ package by.fyodorov.informationhandling.composite;
 import java.util.LinkedList;
 
 public class TextCompositeComponent implements Compositely {
-    private LinkedList<Compositely> childs;
+    private LinkedList<Compositely> childes;
 
     public TextCompositeComponent() {
-        childs = new LinkedList<Compositely>();
+        childes = new LinkedList<Compositely>();
     }
 
     @Override
     public void addChild(Compositely child) {
-        childs.add(child);
+        childes.add(child);
     }
 
     @Override
     public LinkedList<Compositely> getChildrens() {
-        return childs;
+        return childes;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (Compositely i : childs) {
+        for (Compositely i : childes) {
             builder.append(i.toString());
         }
         return builder.toString();
@@ -30,6 +30,6 @@ public class TextCompositeComponent implements Compositely {
 
     @Override
     public void addChildList(LinkedList<Compositely> childrens) {
-        childs.addAll(childrens);
+        childes.addAll(childrens);
     }
 }

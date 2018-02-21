@@ -15,7 +15,7 @@ public class TextParserHandler extends BaseParserHandler {
         LinkedList<String> paragraphs = super.parseRegular(part, PARAGRAPH_EXPRESSION);
         if (next != null) {
             for (String paragraph : paragraphs) {
-                textRoot.addChild(next.parse(paragraph));
+                textRoot.addChild(next.parse("\t" + paragraph));
             }
         }
         return textRoot;

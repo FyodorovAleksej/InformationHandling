@@ -1,12 +1,16 @@
 package by.fyodorov.informationhandling.interpretator;
 
 import by.fyodorov.informationhandling.exception.TextException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Stack;
 
 public class Context {
+    private static final Logger LOGGER = LogManager.getLogger(Context.class);
 
     public Expression evaluate(String s) throws TextException {
+        LOGGER.info("evaluate: \"" + s + "\"");
         String[] expressions = s.split(" ");
         Stack<Expression> stack = new Stack<Expression>();
 
@@ -26,7 +30,13 @@ public class Context {
 
             if (isMinus(expressions[i])) {
                 Expression right = stack.pop();
-                Expression left = stack.pop();
+                Expression left;
+                if (stack.isEmpty()) {
+                    left = new NumericExpression(0);
+                }
+                else {
+                    left = stack.pop();
+                }
                 stack.push(new MinusExpression(left, right));
             }
 
