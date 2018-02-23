@@ -11,6 +11,7 @@ import java.util.ArrayDeque;
  */
 public class Context {
     private static final Logger LOGGER = LogManager.getLogger(Context.class);
+    private static final String SPLITTER = "\\s";
 
     /**
      * evaluating polish notation to result
@@ -20,7 +21,7 @@ public class Context {
      */
     public Expression evaluate(String polish) throws TextException {
         LOGGER.debug("evaluate: \"" + polish + "\"");
-        String[] expressions = polish.split(" ");
+        String[] expressions = polish.split(SPLITTER);
         ArrayDeque<Expression> stack = new ArrayDeque<>();
 
         for (int i = 0; i < expressions.length; i++) {
