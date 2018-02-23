@@ -1,2 +1,5 @@
 # InformationHandling
-Task2
+
+KickStart part B
+
+Documentation [En](https://fyodorovaleksej.github.io/InformationHandling/)
