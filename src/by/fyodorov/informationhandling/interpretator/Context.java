@@ -4,18 +4,27 @@ import by.fyodorov.informationhandling.exception.TextException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
+/**
+ * class for creating interpretative tree from Polish notation
+ */
 public class Context {
     private static final Logger LOGGER = LogManager.getLogger(Context.class);
 
-    public Expression evaluate(String s) throws TextException {
-        LOGGER.info("evaluate: \"" + s + "\"");
-        String[] expressions = s.split(" ");
-        Stack<Expression> stack = new Stack<Expression>();
+    /**
+     * evaluating polish notation to result
+     * @param polish polish notation
+     * @return tree of expressions for evaluating
+     * @throws TextException in case, when polish notation is not valid
+     */
+    public Expression evaluate(String polish) throws TextException {
+        LOGGER.debug("evaluate: \"" + polish + "\"");
+        String[] expressions = polish.split(" ");
+        ArrayDeque<Expression> stack = new ArrayDeque<>();
 
         for (int i = 0; i < expressions.length; i++) {
-            if (isAripmetic(expressions[i])) {
+            if (isArithmetic(expressions[i])) {
                 stack.push(new ExecuteExpression(expressions[i]));
             }
             if (isNumber(expressions[i])) {
@@ -49,7 +58,7 @@ public class Context {
             if (isDivide(expressions[i])) {
                 Expression right = stack.pop();
                 Expression left = stack.pop();
-                stack.push(new DevisionExpression(left, right));
+                stack.push(new DivisionExpression(left, right));
             }
         }
         if (stack.size() > 1) {
@@ -57,6 +66,7 @@ public class Context {
         }
         return stack.pop();
     }
+
 
     private boolean isNumber(String s) {
         final String NUMBER_EXPRESSION = "\\s?[0-9]+\\s?";
@@ -83,10 +93,10 @@ public class Context {
         return s.matches(DIVIDE_EXPRESSION);
     }
 
-    private boolean isAripmetic(String s) {
-        final String POSTFIKS_EXPRESSION = "[ij][+\\-]{2}";
-        final String PREFIKS_EXPRESSION = "[\\-+]{2}[ij]";
-        final String ARIPMETIC_EXPRESSION = "(" + POSTFIKS_EXPRESSION + ")|(" + PREFIKS_EXPRESSION + ")";
-        return s.matches(ARIPMETIC_EXPRESSION);
+    private boolean isArithmetic(String s) {
+        final String POSTFIX_EXPRESSION = "[ij][+\\-]{2}";
+        final String PREFIX_EXPRESSION = "[\\-+]{2}[ij]";
+        final String ARITHMETIC_EXPRESSION = "(" + POSTFIX_EXPRESSION + ")|(" + PREFIX_EXPRESSION + ")";
+        return s.matches(ARITHMETIC_EXPRESSION);
     }
 }

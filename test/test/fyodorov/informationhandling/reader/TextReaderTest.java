@@ -12,14 +12,14 @@ public class TextReaderTest {
         final String PATH = "input/text.txt";
         TextReader reader = new TextReader();
         String text = reader.readText(PATH);
-        Assert.assertEquals(text, "NO\nTO\nASSERT\n");
+        Assert.assertEquals(text, "NO\nTO\nASSERT");
     }
 
     @Test(expectedExceptions = TextException.class)
     public void testReadNegative() throws Exception {
         final String PATH = "input/IN.txt";
         TextReader reader = new TextReader();
-        String text = reader.readText(PATH);
+        reader.readText(PATH);
         Assert.fail("file wasn't exist");
     }
 }

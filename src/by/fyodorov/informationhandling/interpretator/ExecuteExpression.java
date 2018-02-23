@@ -1,17 +1,25 @@
 package by.fyodorov.informationhandling.interpretator;
 
+/**
+ * class of executable element of expression ((i|j)(++|--) | (++|--)(i|j))
+ */
 public class ExecuteExpression implements Expression {
-    final static String POSTFIKS_EXPRESSION = "[ij][+\\-]{2}";
-    final static String PREFIKS_EXPRESSION = "[\\-+]{2}[ij]";
+    private final static String POSTFIX_EXPRESSION = "[ij][+\\-]{2}";
+    private final static String PREFIX_EXPRESSION = "[\\-+]{2}[ij]";
     private String expression;
 
     public ExecuteExpression(String expression) {
         this.expression = expression;
     }
 
+    /**
+     * execute operation of increment or decrement and return result.
+     * executing can be activate before getting value or after getting value;
+     * @return result of operation
+     */
     @Override
     public int interpret() {
-        if (expression.matches(POSTFIKS_EXPRESSION)) {
+        if (expression.matches(POSTFIX_EXPRESSION)) {
             if (expression.indexOf('-') != -1) {
                 if (expression.indexOf('i') != -1) {
                     int i = StaticArguments.getInstance().getI();
@@ -38,7 +46,7 @@ public class ExecuteExpression implements Expression {
                 }
             }
         }
-        if (expression.matches(PREFIKS_EXPRESSION)) {
+        if (expression.matches(PREFIX_EXPRESSION)) {
             if (expression.indexOf('-') != -1) {
                 if (expression.indexOf('i') != -1) {
                     StaticArguments.getInstance().decrementI();
@@ -61,7 +69,6 @@ public class ExecuteExpression implements Expression {
                 }
             }
         }
-
         return 0;
     }
 }

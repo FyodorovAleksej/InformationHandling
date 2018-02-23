@@ -1,34 +1,24 @@
 package test.fyodorov.informationhandling.composite;
 
-import by.fyodorov.informationhandling.composite.TextCompositeComponent;
 import by.fyodorov.informationhandling.composite.CompositeLeaf;
+import by.fyodorov.informationhandling.composite.CompositeType;
 import by.fyodorov.informationhandling.composite.Compositely;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import by.fyodorov.informationhandling.composite.TextCompositeComponent;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class ComponentTest {
 
-    @BeforeMethod
-    public void setUp() throws Exception {
-    }
-
-    @AfterMethod
-    public void tearDown() throws Exception {
-    }
-
-
     @Test
-    public void testExecute() throws Exception {
-        TextCompositeComponent component = new TextCompositeComponent();
-        TextCompositeComponent component1 = new TextCompositeComponent();
-        TextCompositeComponent component2 = new TextCompositeComponent();
-        TextCompositeComponent component3 = new TextCompositeComponent();
-        TextCompositeComponent component4 = new TextCompositeComponent();
-        TextCompositeComponent component5 = new TextCompositeComponent();
-        TextCompositeComponent component6 = new TextCompositeComponent();
+    public void testExecute() {
+        TextCompositeComponent component = new TextCompositeComponent(CompositeType.TEXT);
+        TextCompositeComponent component1 = new TextCompositeComponent(CompositeType.TEXT);
+        TextCompositeComponent component2 = new TextCompositeComponent(CompositeType.TEXT);
+        TextCompositeComponent component3 = new TextCompositeComponent(CompositeType.TEXT);
+        TextCompositeComponent component4 = new TextCompositeComponent(CompositeType.TEXT);
+        TextCompositeComponent component5 = new TextCompositeComponent(CompositeType.TEXT);
+        TextCompositeComponent component6 = new TextCompositeComponent(CompositeType.TEXT);
 
         Compositely leaf = new CompositeLeaf('A');
         Compositely leaf1 = new CompositeLeaf('l');

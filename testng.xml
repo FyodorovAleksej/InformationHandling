@@ -39,6 +39,21 @@
                     <include name="testReadNegative"/>
                 </methods>
             </class>
+            <class name="test.fyodorov.informationhandling.comporator.LexemeComparatorTest">
+                <methods>
+                    <include name="testLexemeSort"/>
+                </methods>
+            </class>
+            <class name="test.fyodorov.informationhandling.comporator.ParagraphComparatorTest">
+                <methods>
+                    <include name="testParagraphSort"/>
+                </methods>
+            </class>
+            <class name="test.fyodorov.informationhandling.comporator.WordComparatorTest">
+                <methods>
+                    <include name="testWordSort"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
